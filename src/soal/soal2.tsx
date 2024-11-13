@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 
 const data = [
     { id: 1, country: 'United States' },
@@ -23,49 +24,65 @@ const data = [
 ];
 
 function Soal2() {
-    // buatlah select box tanpa menggunakan plugin
-    console.log(data)
-    
-  return (
-    <div
-        style={{
-            display: "flex",
-            justifyContent: "center",
-            paddingTop: "100px",
-        }}
-    >
-        <div>
-            <p
-                style={{
-                    fontSize: "18px",
-                    color: "white",      
-                }}
-            >
-                value: 
-            </p>
+    const [dataNationality, setDataNationality] = useState('');
 
+    // Fungsi untuk menangani perubahan pada dropdown
+    const handleChange = (event) => {
+        setDataNationality(event.target.value);
+    };
+
+    return (
+        <div
+            style={{
+                display: "flex",
+                justifyContent: "center",
+                paddingTop: "100px",
+            }}
+        >
             <div>
-                <input 
-                    type="text" 
-                    placeholder="Select"
+                <p
                     style={{
-                        backgroundColor: "white",
-                        padding: "8px",
-                        borderRadius: "8px"
+                        fontSize: "18px",
+                        color: "white",      
                     }}
-                />
-            </div>       
-        </div>
+                >
+                    value:{dataNationality}
+                </p>
 
-        {/* Ekspektasi hasil */}
-        <iframe src="/soal2.mp4" style={{
-          position:"fixed",
-          bottom:0,
-          right:0,
-          border:"1px solid white",
-        }}></iframe>
-    </div>
-  )
+                <div>
+                    <select 
+                        onChange={handleChange}
+                        value={dataNationality}
+                        style={{
+                            backgroundColor: "white",
+                            padding: "8px",
+                            borderRadius: "8px",
+                            border: "1px solid #ccc",
+                            fontSize: "16px",
+                        }}
+                    >
+                        <option value="" disabled>Select country</option>
+                        {data.map((item) => (
+                            <option key={item.id} value={item.country}>
+                                {item.country}
+                            </option>
+                        ))}
+                    </select>
+                </div>       
+            </div>
+
+            {/* Ekspektasi hasil */}
+            <iframe 
+                src="/soal2.mp4" 
+                style={{
+                    position: "fixed",
+                    bottom: 0,
+                    right: 0,
+                    border: "1px solid white",
+                }}
+            ></iframe>
+        </div>
+    );
 }
 
-export default Soal2
+export default Soal2;
